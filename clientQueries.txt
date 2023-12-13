@@ -1,0 +1,69 @@
+=============================================================================
+query getAllUser{
+  users{
+    id
+    email
+    __typename
+  }
+}
+=============================================================================
+
+query getAllQuotes{
+  quotes{
+    by
+    name
+  }
+}
+
+==============================================================================
+query getUserById{
+  user(id:"123"){
+    id
+    firstName
+    lastName
+    email
+    quotes{
+      name
+    }
+  }
+}
+
+===============================================================================
+query getQuoteById {
+  iquote(by: "124") {
+    by
+    name
+  }
+}
+
+===============================================================================
+query getQuoteById($quoteby: ID!) {
+  iquote(by: $quoteby) {
+    by
+    name
+  }
+}
+
+===============================================================================
+mutation createUser($userNew: UserInput!) {
+// user : is basically alias
+  user: signupUserDummy(userNew: $userNew) {
+    id
+    firstName
+    lastName
+    email
+  }
+}
+
+============================================================================
+query getUserById($userid: ID!) {
+  user(id:$userid) {
+    id
+    firstName
+    lastName
+    email
+  }
+}
+
+============================================================================
+
