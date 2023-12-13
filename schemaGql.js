@@ -46,6 +46,7 @@ const typeDefs = gql`
     signupUser(userNew: UserInput!): User
     signinUser(userSignin: UserSigninInput!): Token
     createQuote(name: String!): String
+    deleteQuote(quoteId: ID!): String
   }
 
   input UserInput {

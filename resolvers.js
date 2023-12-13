@@ -50,6 +50,7 @@ const resolvers = {
       const token = jwt.sign({ userId: user._id }, JWT_SECRET);
       return { token: token };
     },
+
     // Create Quote
     createQuote: async (_, { name }, { userId }) => {
       if (!userId) throw new Error("You must be logged in"); // This will check if the user is logged in or not.
@@ -59,6 +60,16 @@ const resolvers = {
       });
       await newQuote.save();
       return `Quote saved successfully`;
+    },
+
+    // Delete Quote
+    deleteQuote: async (_, { quoteId }, { userId }) => {
+      if (!userId) throw new Error("You must be logged in");
+      const result = await Quotes.findOneAndDelete({ _id: quoteId });
+      if (!result) {
+        throw new Error("Quote not found or already deleted.");
+      }
+      return "Quote deleted successfully.";
     },
   },
 };
