@@ -1,13 +1,13 @@
 export const users = [
   {
-    id: "1",
+    _id: "1",
     firstName: "Vishrut",
     lastName: "Agarwalla",
     email: "vishrutagarwalla19@gmail.com",
     password: "12345",
   },
   {
-    id: "2",
+    _id: "2",
     firstName: "Riya",
     lastName: "Agarwal",
     email: "riya.agarwal04@gmail.com",
