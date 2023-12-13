@@ -20,17 +20,19 @@ import "./models/Quotes.js";
 import "./models/User.js";
 import resolvers from "./resolvers.js";
 
+// This is middleware to check if the user is logged in or not already.
+const context = ({ req }) => {
+  const { authorization } = req.headers;
+  if (authorization) {
+    const { userId } = jwt.verify(authorization, JWT_SECRET);
+    return { userId: userId }; // This will return the user id.
+  }
+};
+
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  // Here we will first check if the user is logged in or not already.
-  context: ({ req }) => {
-    const { authorization } = req.headers;
-    if (authorization) {
-      const { userId } = jwt.verify(authorization, JWT_SECRET);
-      return { userId: userId }; // This will return the user id.
-    }
-  },
+  typeDefs: typeDefs,
+  resolvers: resolvers,
+  context: context,
   // plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 

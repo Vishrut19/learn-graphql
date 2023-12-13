@@ -9,13 +9,14 @@ const Quotes = mongoose.model("Quotes");
 
 const resolvers = {
   Query: {
-    users: () => users,
-    quotes: () => quotes,
-    user: (_, { _id }) => users.find((user) => user._id === _id),
-    iquote: (_, { by }) => quotes.filter((quote) => quote.by === by),
+    users: async () => await User.find(),
+    //Here we are expanding the by to get _id as well as firstName of the user who created the quote.
+    quotes: async () => await Quotes.find().populate("by", "_id firstName"),
+    user: async (_, { _id }) => await User.findOne({ _id: _id }),
+    iquote: async (_, { by }) => await Quotes.find({ by: by }),
   },
   User: {
-    quotes: (ur) => quotes.filter((quote) => quote.by === ur._id),
+    quotes: async (ur) => await Quotes.find({ by: ur._id }),
   },
   Mutation: {
     // SIGN UP USER
