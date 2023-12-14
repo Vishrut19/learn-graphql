@@ -65,6 +65,7 @@ const resolvers = {
     // Delete Quote
     deleteQuote: async (_, { quoteId }, { userId }) => {
       if (!userId) throw new Error("You must be logged in");
+      // Here we are finding the quote by the id and deleting it.
       const result = await Quotes.findOneAndDelete({ _id: quoteId });
       if (!result) {
         throw new Error("Quote not found or already deleted.");
