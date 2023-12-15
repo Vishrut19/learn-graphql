@@ -1,17 +1,11 @@
 import "./App.css";
-import Login from "./components/Login.jsx";
-import Signup from "./components/Signup.jsx";
-import Profile from "./components/Profile.jsx";
-import CreateQuote from "./components/CreateQuote.jsx";
-import Home from "./components/Home.jsx";
+import AppRoutes from "./routes.jsx";
+import NavBar from "./components/NavBar.jsx";
 function App() {
   return (
     <>
-      {/*<Signup />*/}
-      {/*<Login />*/}
-      {/*<Profile />*/}
-      {/*<CreateQuote />*/}
-      <Home />
+      <NavBar />
+      <AppRoutes />
     </>
   );
 }

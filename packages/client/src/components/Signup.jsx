@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -46,6 +47,9 @@ const Signup = () => {
           name="password"
           onChange={handleChange}
         />
+        <Link to={"/login"}>
+          <p>Already have an account ?</p>
+        </Link>
         <button className="btn #673ab7 deep-purple" type="submit">
           Submit
         </button>

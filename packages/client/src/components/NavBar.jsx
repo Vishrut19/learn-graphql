@@ -1,22 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <div>
       <nav>
-        <div className="nav-wrapper">
-          <a href="#" className="brand-logo left ">
+        <div className="nav-wrapper #673ab7 deep-purple">
+          <Link to="/" className="brand-logo left ">
             Quotes App
-          </a>
+          </Link>
           <ul id="nav-mobile" className="right">
             <li>
-              <a href="sass.html">Sass</a>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <a href="badges.html">Components</a>
+              <Link to="/signup">Signup</Link>
             </li>
             <li>
-              <a href="collapsible.html">JavaScript</a>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/create">Create Quote</Link>
             </li>
           </ul>
         </div>
