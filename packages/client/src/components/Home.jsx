@@ -8,6 +8,11 @@ function Home() {
   if (error) {
     console.log(error.message);
   }
+  if (data.quotes.length === 0) {
+    return <h1>No quotes found</h1>;
+  } else {
+    console.log(data.quotes);
+  }
   return (
     <div className="container">
       {data.quotes.map((quote, index) => {
