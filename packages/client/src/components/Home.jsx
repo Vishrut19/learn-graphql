@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_QUOTES } from "../gqloperations/queries.js";
 

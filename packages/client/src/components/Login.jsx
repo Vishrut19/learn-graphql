@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../gqloperations/mutations";
 
-const Login = () => {
-  const [formData, setFormData] = useState({});
+export default function Login() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({});
+  const [signinUser, { error, loading, data }] = useMutation(LOGIN_USER, {
+    // onCompleted is a callback function that will be called when the mutation is completed.
+    onCompleted(data) {
+      // Here we are setting token to localStorage to store the user token.
+      localStorage.setItem("token", data.user.token);
+      navigate("/");
+    },
+  });
+
+  if (loading) return <h1>Loading</h1>;
 
   const handleChange = (e) => {
     setFormData({
@@ -11,31 +23,36 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate("/");
+    signinUser({
+      variables: {
+        userSignin: formData,
+      },
+    });
   };
   return (
     <div className="container my-container">
+      {error && <div className="red card-panel">{error.message}</div>}
       <h5>Login!!</h5>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          placeholder="Email"
-          required
+          placeholder="email"
           name="email"
           onChange={handleChange}
+          required
         />
         <input
           type="password"
-          placeholder="Password"
-          required
+          placeholder="password"
           name="password"
           onChange={handleChange}
+          required
         />
-        <Link to={"/signup"}>
-          <p>Don't have a account ?</p>
+        <Link to="/signup">
+          <p>Dont have an account ?</p>
         </Link>
         <button className="btn #673ab7 deep-purple" type="submit">
           Login
@@ -43,6 +60,4 @@ const Login = () => {
       </form>
     </div>
   );
-};
-
-export default Login;
+}
