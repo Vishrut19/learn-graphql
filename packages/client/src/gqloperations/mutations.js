@@ -15,3 +15,15 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const CREATE_QUOTE = gql`
+  mutation CreateQuote($name: String!) {
+    quote: createQuote(name: $name)
+  }
+`;
+
+export const DELETE_QUOTE = gql`
+  mutation CreateQuote($quoteId: ID!) {
+    deleteQuote(quoteId: $quoteId)
+  }
+`;
