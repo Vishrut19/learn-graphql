@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_QUOTE } from "../gqloperations/mutations.js";
-import { GET_ALL_QUOTES } from "../gqloperations/queries.js";
+import { GET_ALL_QUOTES, GET_MY_PROFILE } from "../gqloperations/queries.js";
 
 function CreateQuote() {
   const [quote, setQuote] = useState("");
@@ -9,6 +9,9 @@ function CreateQuote() {
     refetchQueries: [
       {
         query: GET_ALL_QUOTES,
+      },
+      {
+        query: GET_MY_PROFILE,
       },
     ],
   });

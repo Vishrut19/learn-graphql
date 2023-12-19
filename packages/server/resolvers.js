@@ -14,6 +14,10 @@ const resolvers = {
     quotes: async () => await Quotes.find().populate("by", "_id firstName"),
     user: async (_, { _id }) => await User.findOne({ _id: _id }),
     iquote: async (_, { by }) => await Quotes.find({ by: by }),
+    myprofile: async (_, args, { userId }) => {
+      if (!userId) throw new Error("You are not logged in"); // If user is not logged in then this will throw this  error.
+      return await User.findOne({ _id: userId });
+    },
   },
   User: {
     quotes: async (ur) => await Quotes.find({ by: ur._id }),
