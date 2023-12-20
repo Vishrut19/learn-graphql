@@ -1,17 +1,18 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_MY_PROFILE } from "../gqloperations/queries.js";
-import { useNavigate } from "react-router-dom";
+import { GET_USER_BY_ID } from "../gqloperations/queries.js";
+import { useParams } from "react-router-dom";
 
-const Profile = () => {
-  const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_MY_PROFILE);
+const OtherUserProfile = () => {
+  // Here we are passing userid as parameter to the route.
+  const { userid } = useParams();
+  console.log(userid);
 
-  // If user is not logged in, navigate to login page.
-  if (!localStorage.getItem("token")) {
-    navigate("/login");
-    return <h1> Unauthorized User</h1>;
-  }
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    variables: {
+      userid: userid, //First one is graphql variable, second one is the value of the variable i.e. same userid.
+    },
+  });
 
   if (loading) return <h2>Profile is Loading...</h2>;
 
@@ -45,4 +46,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default OtherUserProfile;
